@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+
+<menuitem title="Library" name="krjani's-library"/>
+<menuitem title="Student"  parent="krjani's-library" action="action.Student.Library" name="Student-Library"/>
+<menuitem title="Books"  parent="krjani's-library" action="action.Books.Library" name="Books-Library"/>
+
+
+<action-view name="action.Student.Library" model="com.axelor.library.db.Student" title="Students">
+	<view type="grid" name="student-grid"/>
+	<view type="form" name="student-form"/>
+</action-view>
+
+
+
+<action-view name="action.Books.Library" model="com.axelor.library.db.Books" title="Books">
+	<view type="grid" name="books-grid"/>
+	<view type="form" name="books-form"/>
+</action-view>
+
+</object-views>

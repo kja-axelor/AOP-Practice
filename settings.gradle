@@ -1,0 +1,3 @@
+rootProject.name = 'MiniProjectAdk'
+
+include "modules:krjani-library"

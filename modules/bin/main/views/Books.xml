@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+  
+  
+   <grid name="books-grid" title="Books" 
+    model="com.axelor.library.db.Books"> 
+    <field name="name" title="BookName :" />
+ 
+    
+  </grid>
+  
+  <form model="com.axelor.library.db.Student" title="Student" name="books-form">
+		<panel>
+			<field name="name" title="BookName :"/>
+		</panel>
+	
+  </form>
+  
+</object-views>
