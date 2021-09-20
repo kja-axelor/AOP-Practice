@@ -8,13 +8,13 @@
    <grid name="books-grid" title="Books" 
     model="com.axelor.library.db.Books"> 
     <field name="name" title="BookName :" />
- 
-    
+    <field name="student" title="Student" />
   </grid>
   
-  <form model="com.axelor.library.db.Student" title="Student" name="books-form">
+  <form model="com.axelor.library.db.Student" title="Books" name="books-form">
 		<panel>
 			<field name="name" title="BookName :"/>
+			 <field name="student" title="Student" />
 		</panel>
 	
   </form>

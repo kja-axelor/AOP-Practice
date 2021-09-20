@@ -8,13 +8,21 @@
    <grid name="student-grid" title="Students"
     model="com.axelor.library.db.Student"> 
    
-    <field name="name" title="StudentName :" />
+     <field name="fname" title="First-Name" />
+     <field name="mname" title="Middle-Name" />
+     <field name="lname" title="Sir-Name" />
+     <field name="roll" title="Roll Number" />
+     <field name="book" title="Books" />
   
   </grid>
   
   <form model="com.axelor.library.db.Student" title="Student" name="student-form">
 		<panel>
-			<field name="name" title="StudentName :"/>
+			 <field name="fname" title="First-Name" />
+		     <field name="mname" title="Middle-Name" />
+		     <field name="lname" title="Sir-Name" />
+		     <field name="roll" title="Roll Number" />
+		     <field name="book" title="Books" />
 		</panel>
 	
   </form>

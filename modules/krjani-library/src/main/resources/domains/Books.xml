@@ -4,9 +4,10 @@
   http://axelor.com/xml/ns/domain-models/domain-models_5.2.xsd">
 
   <module name="library" package="com.axelor.library.db"/>
-
-  <entity name="Books">
-    <string name="name"  title="BookName"   required="true" unique="true" min="2" />
-  </entity>
+	
+  <entity name="Books" >
+    <string name="name"  title="BookName"   required="true"   min="2" namecolumn="true" />
+    <many-to-one name="student" ref="com.axelor.library.db.Student"/>  
+  </entity> 
 
 </domain-models>

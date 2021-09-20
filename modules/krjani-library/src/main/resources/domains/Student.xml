@@ -6,7 +6,11 @@
   <module name="library" package="com.axelor.library.db"/>
 
   <entity name="Student">
-    <string name="name"  title="StudentName:"  required="true" unique="true" min="2" />
+    <string name="fname"  title="First-Name"  required="true"  min="2"  namecolumn="true"/>
+    <string name="mname"  title="Middle-Name"  required="true"  min="2" />
+    <string name="lname"  title="Sir-Name"  required="true"  min="2" />    
+    <integer name="roll" title="Roll Number" required="true" unique="true"/>
+    <one-to-many name="book" ref="com.axelor.library.db.Books" mappedBy="student"/> 
   </entity>
 
 </domain-models>
