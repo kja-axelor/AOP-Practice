@@ -4,19 +4,79 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
   
+  <grid name="books-grid" title="Books" 
+    model="com.axelor.library.db.Books" > 
   
-   <grid name="books-grid" title="Books" 
-    model="com.axelor.library.db.Books"> 
-    <field name="name" title="BookName :" />
+  <!--  <grid name="books-grid" title="Books" 
+    model="com.axelor.library.db.Books" canArchive="false" canDelete="false" canEdit="false"  edit-icon="false" canNew="false"  
+    customSearch="true"  aggregate="sum" freeSearch="BookName"  orderBy="student" groupBy="student">  here we can try this attributes -->
+    
+    <!--  bgColor="primary "  canEdit="true" canNew="true" canRemove="true" canView="false" canSuggest="false" domain="self.BookName = 'My Will' " 
+    domain is used for filtering data 
+    domain is also used to filter data in menus
+    hidden = true is used for hidding all columns
+    editable="true" for editing grid inside a view no need to open the form
+    massupdate = directly update with particular update and particular record
+    
+        -->
+        <toolbar>
+	         <button onClick="clickMe" name="clickbtn" title="Click Me From toolbar" icon="fa-print" prompt="are you sure toolbar ?"/>
+        </toolbar>
+        
+        <menubar>
+        <menu title="buttons">
+        	<item action="action" title="testing menu" />
+        </menu>
+         <menu title="buttons1">
+        	<item action="action1" title="testing menu1"/>
+        </menu>
+        
+        </menubar>
+        
+        <hilite if="BookName = My will" background="danger"/>
+    <field name="name" title="BookName :"/>
     <field name="student" title="Student" />
+    <button onClick="clickMe" name="clickbtn" title="Click Me" icon="fa-print" prompt="are you sure ?"/>
+    
   </grid>
   
-  <form model="com.axelor.library.db.Student" title="Books" name="books-form">
-		<panel>
-			<field name="name" title="BookName :"/>
-			 <field name="student" title="Student" />
-		</panel>
-	
+  <!-- readonlyIf="Student" it is used in non relational field -->
+  
+  <form model="com.axelor.library.db.Books" title="Books" name="books-form" >
+		<panel-tabs>
+			<panel name="booksDetail" title="Library Store"> 
+					<field name="name" title="BookName :"/>
+			</panel>
+			<panel name="issuedBook" title="Issued Book"> 
+				<help>This is a place for Student Details</help>
+				<label title="Student Lable"></label>
+				<separator colSpan="12"/>
+				<static>My Static text</static>
+				
+				
+				
+				<field name="student" title="Student"  />
+			
+			</panel>
+		</panel-tabs>
+		
+		<panel-tabs>
+			<panel name="buttonPanel" title="ButtonPanel">
+				<button name="validatebtn" title="My Validate Button" onClick="action-book-validate-onclick-btn" />
+			</panel>
+		</panel-tabs>
   </form>
+  <!-- 
+  	<action-record name="action-books-record-ontabselect" model="com.axelor.library.db.Books">
+  
+  	<field name="name" expr="CHOOTA DON 2" if="name = 'My Ambitions' "/>
+  </action-record>
+  
+  
+   -->
+  
+  <action-validate name="action-book-validate-onclick-btn">
+  	<info message="My Ambitions had clicked me!!!!!!!" if="name == 'My Ambitions'"/>
+  </action-validate>
   
 </object-views>

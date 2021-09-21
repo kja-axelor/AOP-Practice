@@ -20,7 +20,7 @@ allprojects {
 apply plugin: 'com.axelor.app'
 
 axelor {
-  title = 'Axelor :: DEMO'
+  title = 'Krjani :: Library'
 }
 
 allprojects {

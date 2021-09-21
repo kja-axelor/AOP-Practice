@@ -8,23 +8,46 @@
    <grid name="student-grid" title="Students"
     model="com.axelor.library.db.Student"> 
    
-     <field name="fname" title="First-Name" />
+     <field name="fname" title="First-Name"  widget="1000px"/>
      <field name="mname" title="Middle-Name" />
      <field name="lname" title="Sir-Name" />
      <field name="roll" title="Roll Number" />
      <field name="book" title="Books" />
+     
+     
   
   </grid>
   
-  <form model="com.axelor.library.db.Student" title="Student" name="student-form">
-		<panel>
-			 <field name="fname" title="First-Name" />
-		     <field name="mname" title="Middle-Name" />
-		     <field name="lname" title="Sir-Name" />
-		     <field name="roll" title="Roll Number" />
-		     <field name="book" title="Books" />
+  <form model="com.axelor.library.db.Student" title="Student" name="student-form" onNew="action-new-student-onnew"
+  onLoad="action-load-student" onSave="action-save-student" canAttach="false" width="large"
+  >
+		<panel name="mainPanel" title="MY MAIN PANNEL">
+		
+			<panel name="innerPanel1" colSpan="8" title="INNER 1" collapseIf="true"> 	
+				<field name="fname" title="First-Name" colSpan="4" />
+		     	<field name="mname" title="Middle-Name" />
+			</panel>
+			
 		</panel>
-	
+  		<panel name="innerPanel2" colSpan="4" title="INNER 2" hideIf="lname=='Jani'" readonly="false" showFrame="true" attached="true" sidebar="true" stacked="true"  collapseIf="true"> 
+				 <field name="lname" title="Sir-Name"  />
+			     <field name="roll" title="Roll Number" />
+			     <!-- panel related is used for o2m and m2m instead of fields -->
+			     <!--  <field name="book" title="Books"  showTitle="false"/> -->
+			     <panel-related field="book" title="Books" canNew="true"/>
+		</panel> 
   </form>
   
+  
+  <action-record name="action-new-student-onnew" model="com.axelor.library.db.Student">
+  	<field name="lname" expr="JANI"/>
+  </action-record>
+  
+  <action-validate name="action-load-student" model="com.axelor.library.db.Student">
+  	<notify message="This Student dont have rollnumber" if="roll == 0"/>
+  </action-validate>
+  
+  <action-record name="action-save-student" model="com.axelor.library.db.Student">
+  <field name="lname" expr="DONE"/>
+  </action-record>
 </object-views>
