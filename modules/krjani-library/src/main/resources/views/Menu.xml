@@ -8,6 +8,7 @@
 <menuitem title="Library" name="krjani's-library"/>
 <menuitem title="Student"  parent="krjani's-library" action="action.Student.Library" name="Student-Library"/>
 <menuitem title="Books"  parent="krjani's-library" action="action.Books.Library" name="Books-Library"/>
+<menuitem title="Librarian" parent="krjani's-library" action="action.Librarian.Library" name="Librarian-library"/>
 
 
 <action-view name="action.Student.Library" model="com.axelor.library.db.Student" title="Students">
@@ -22,6 +23,13 @@
 <action-view name="action.Books.Library" model="com.axelor.library.db.Books" title="Books">
 	<view type="grid" name="books-grid"/>
 	<view type="form" name="books-form"/>
+</action-view>
+
+
+<action-view name="action.Librarian.Library" title="Librarians" model="com.axelor.library.db.Librarian">
+	<view type="kanban" name="library-kanban"/>
+	<view type="grid" name="library-grid"/>
+	<view type="form" name="library-form"/>
 </action-view>
 
 </object-views>

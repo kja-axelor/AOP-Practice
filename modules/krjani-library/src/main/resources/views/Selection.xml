@@ -6,8 +6,18 @@
 
 <!-- module.entity.field -->
 	<selection name="com.axelor.library.db.Books.type" >
-	<option value="government">PublicBook</option>
-	<option value="private">PrivateBook</option>
+		<option value="government">PublicBook</option>
+		<option value="private">PrivateBook</option>
+	</selection>
+	
+	
+<!-- selection for kanban view -->
+	<selection name="library.librarian.status.select">
+		<option value="0">Request</option>
+		<option value="1">Issued Book</option>
+		<option value="2">Returned Book</option>
+		<option value="3">N.A Book</option>
+		<option value="4">Penalty</option>
 	</selection>
 
 </object-views>

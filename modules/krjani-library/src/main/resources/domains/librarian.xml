@@ -1,0 +1,18 @@
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.2.xsd">
+  
+   <module name="library" package="com.axelor.library.db"/>
+   
+  	<entity name="Librarian">
+  		<integer name="statusSelect" selection="library.librarian.status.select" title="Status" />
+  		<integer name="priority" />
+  		
+  		<decimal name="price" title="$"/>
+  		<string name="sname" title="Student:" />
+  		<string name="bname" title="Book:" />
+  		<string name="description" title="Description" large="true" />
+  	</entity> 
+  
+  </domain-models>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+  
+  <!-- Kan ban view 
+  	like cards field and template is required  in kanban 
+  	first define kanban
+  	grid view
+  	form view
+  	limit means upto how many record per column then scroler will add
+  -->
+  
+  <kanban name="library-kanban" sequenceBy="priority" model="com.axelor.library.db.Librarian" 
+  columnBy="statusSelect" title="Librarians" draggable="true"
+   onMove="action-librarian-validate-kanban-on-move" onNew="action-librarian-kanban-on-new"
+   limit="2"
+   >
+  	<field name="sname"/>
+  	<field name="bname"/>
+ 	<field name="price"/>
+  	<field name="description"/>
+  	<template>
+  		<![CDATA[
+  					<div>
+  						<h4>Student:</h4>
+  						<h3>{{record.sname}}</h3>
+  						<h4>Book:</h4>
+  						<h3>{{record.bname}}</h3>
+  						<h4>Price</h4>
+  						<h3>{{record.price}}</h3>
+  						<h4>Description:</h4>
+  						<span ng-bind-html="description"/>
+  					</div>
+  		]]>
+  	</template>
+  </kanban>
+  
+  <grid model="com.axelor.library.db.Librarian" title="Librarian" name="library-grid">
+ 	<field name="statusSelect" showTitle="false" widget="NavSelect" />
+ 	<field name="sname"/>
+  	<field name="bname"/>
+ 	<field name="price"/>
+  	<field name="description"/>
+  </grid>
+  
+  <form model="com.axelor.library.db.Librarian" title="Librarian" name="library-form">
+  	<panel name="mainPanel" title="Librarian">
+  		<field name="statusSelect" showTitle="false" widget="NavSelect" colSpan="12" />
+	  	<field name="sname"/>
+	  	<field name="bname"/>
+	 	<field name="price"/>
+	  	<field name="description" widget="html" colSpan="12"/>
+  	</panel>
+  </form>
+  
+  <!-- you can directly add your field name with onNew -->
+  <action-record name="action-librarian-kanban-on-new" model="com.axelor.library.db.Librarian">
+  		<field name="sname" expr="eval: _value"/>
+  </action-record>
+  <action-validate name="action-librarian-validate-kanban-on-move">
+  	<info message="Record moved!!!!!!!!!"/>
+  </action-validate>
+</object-views>
