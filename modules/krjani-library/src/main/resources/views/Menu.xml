@@ -13,6 +13,8 @@
 <action-view name="action.Student.Library" model="com.axelor.library.db.Student" title="Students">
 	<view type="grid" name="student-grid"/>
 	<view type="form" name="student-form"/>
+	<!-- card view -->
+	<view type="cards" name="students-cards"/>
 </action-view>
 
 

@@ -40,18 +40,45 @@
 			     <!--  <panel-related field="book" title="Books" canNew="true"/> -->
 		</panel> 
 		<panel-tabs>
-			<panel>
+			<panel title="BookStore">
 				 <!-- panel related is used for o2m and m2m instead of fields -->
 			     <!--  <field name="book" title="Books"  showTitle="false"/> -->
 			     <!-- x-selector checkbox means , to select all row , there are checkbox in first column to select on -->
 			     <panel-related field="book" title="Books" canNew="true" colSpan="12" canMove="true" orderBy="name" x-selector="checkbox"/>
 			</panel>
+			
+			<!-- 			Editor Text              
+			editor viewer will give an impact that relation model field in the same form not in another form (pop up form) but the view will be differnet
+			in the text mode
+			   -->
+			<panel title="books editor">
+				<field name="book" >
+					<editor x-viewer="true">
+						<field name="name"></field>
+					</editor>
+				</field>
+			</panel>
+			
+			<panel title="books viewer">
+				<field name="book" >
+					<viewer>
+						<![CDATA[
+								<strong>{{record.name}}</strong>
+								<h1>hello</h1>
+						]]>		
+					</viewer>
+					<editor x-viewer="false">
+						<field name="name" />
+					</editor>
+				</field>
+			</panel>
+
 		</panel-tabs>
   </form>
   
   
   <!-- Panel include is used for adding one form into another form 
-  	   panel include will be applied on same model form
+  	   panel include will be apply on same modle
   
   -->
   <!--   form2 -->
@@ -64,6 +91,43 @@
 		</panel>
   </form>
   
+ 		<!--  card views ...
+ 	we have to use templates in card views
+ 	if there is any relational fields and if you want to use its internal field then you can use it with doted field
+ 	we need to define cards in menu then we are accessing it
+ 	  <img ng-if="hasImage" ng-src="{{$image(null, 'image')}}">
+ 	  ng-if means if condition ng-src means source
+ 	  If there are image it should be display or keet it blank
+ 	 	-->
+ 	
+ 	<cards name="students-cards" model="com.axelor.library.db.Student" title="Student" width="500px">
+ 	
+	     <field name="fname" title="First-Name"/>
+	     <field name="mname" title="Middle-Name" />
+	     <field name="lname" title="Sir-Name" />
+	     <field name="roll" title="Roll Number" />
+	     <field name="book" title="Books" />
+	     <template>
+	    	<![CDATA[
+			    	<div class="span4 card-image">
+			    		<h5>Fname:</h5>
+					    <span>{{fname}}</span>
+					    <br/>
+					    <h5>Mname:</h5>
+					    <span>{{mname}}</span>
+				 	</div>
+				 	<div class="span8">
+					    <h5>Sname:</h5>
+					    <span>{{lname}}</span>
+					    <br/>
+					    <h5>Rollno:</h5>
+					    <span>{{roll}}</span>
+					</div>
+	    	]]>
+	     </template>
+	     
+ 	</cards>	
+ 
   <action-record name="action-new-student-onnew" model="com.axelor.library.db.Student">
   	<field name="lname" expr="JANI"/>
   </action-record>
@@ -73,6 +137,6 @@
   </action-validate>
   
   <action-record name="action-save-student" model="com.axelor.library.db.Student">
-  <field name="lname" expr="DONE"/>
+  <field name="lname" expr="DONE" if="lname == 'Hirpara' "/>
   </action-record>
 </object-views>
