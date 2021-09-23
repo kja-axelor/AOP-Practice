@@ -6,8 +6,12 @@
   <module name="library" package="com.axelor.library.db"/>
 	
   <entity name="Books" >
+  	
+  	<integer name="sequence" />
+  	
     <string name="name"  title="BookName"   required="true"   min="2"   namecolumn="true"/>
     <string name="email" title="Email" />    
-    <many-to-one name="student" ref="com.axelor.library.db.Student"/>  
+    <many-to-one name="student" ref="com.axelor.library.db.Student"/>   
+    <!-- <many-to-many name="student" ref="com.axelor.library.db.Student"/>   -->
   </entity> 
 </domain-models>

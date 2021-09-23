@@ -21,23 +21,48 @@
   <form model="com.axelor.library.db.Student" title="Student" name="student-form" onNew="action-new-student-onnew"
   onLoad="action-load-student" onSave="action-save-student" canAttach="false" width="large"
   >
+  		<panel-include view="Student-popup-form"/>
+  	
 		<panel name="mainPanel" title="MY MAIN PANNEL">
 		
-			<panel name="innerPanel1" colSpan="8" title="INNER 1" collapseIf="true"> 	
-				<field name="fname" title="First-Name" colSpan="4" />
+			<panel name="innerPanel1" colSpan="8" title="PERSONAL" collapseIf="true"> 	
+			 	<!-- <field name="fname" title="First-Name" colSpan="4" /> -->
 		     	<field name="mname" title="Middle-Name" />
+		    	<!-- 	<field name="lname" title="Sir-Name"  />  -->
 			</panel>
 			
 		</panel>
-  		<panel name="innerPanel2" colSpan="4" title="INNER 2" hideIf="lname=='Jani'" readonly="false" showFrame="true" attached="true" sidebar="true" stacked="true"  collapseIf="true"> 
-				 <field name="lname" title="Sir-Name"  />
+  		<panel name="innerPanel2" colSpan="4" title="ACADEMIC" hideIf="lname=='Jani'" readonly="false" showFrame="true" attached="true" sidebar="true" stacked="true"  collapseIf="true"> 
+				
 			     <field name="roll" title="Roll Number" />
 			     <!-- panel related is used for o2m and m2m instead of fields -->
 			     <!--  <field name="book" title="Books"  showTitle="false"/> -->
-			     <panel-related field="book" title="Books" canNew="true"/>
+			     <!--  <panel-related field="book" title="Books" canNew="true"/> -->
 		</panel> 
+		<panel-tabs>
+			<panel>
+				 <!-- panel related is used for o2m and m2m instead of fields -->
+			     <!--  <field name="book" title="Books"  showTitle="false"/> -->
+			     <!-- x-selector checkbox means , to select all row , there are checkbox in first column to select on -->
+			     <panel-related field="book" title="Books" canNew="true" colSpan="12" canMove="true" orderBy="name" x-selector="checkbox"/>
+			</panel>
+		</panel-tabs>
   </form>
   
+  
+  <!-- Panel include is used for adding one form into another form 
+  	   panel include will be applied on same model form
+  
+  -->
+  <!--   form2 -->
+  <form model="com.axelor.library.db.Student" title="Student" name="Student-popup-form">
+	  	<panel name="mainPanel" colSpan="8" title="PERSONAL" collapseIf="true"> 	
+					<field name="fname" title="First-Name" colSpan="4" />
+			     	<!-- <field name="mname" title="Middle-Name" /> -->
+			     	 <field name="lname" title="Sir-Name"  />
+			     	<!-- <field name="book"  title="Books" hideIf="$popup()"/> -->
+		</panel>
+  </form>
   
   <action-record name="action-new-student-onnew" model="com.axelor.library.db.Student">
   	<field name="lname" expr="JANI"/>
