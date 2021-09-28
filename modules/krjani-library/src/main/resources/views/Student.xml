@@ -63,8 +63,8 @@
 				<field name="book" >
 					<viewer>
 						<![CDATA[
-								<strong>{{record.name}}</strong>
-								<h1>hello</h1>
+								<strong>Bookname</strong>
+								<h1>{{record.name}}</h1>
 						]]>		
 					</viewer>
 					<editor x-viewer="false">

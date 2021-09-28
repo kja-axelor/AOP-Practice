@@ -59,7 +59,7 @@ type of dummy field is one to many and many to one and boolean also, but we have
  				
 				<help>This is a place for Student Details</help>
 				<label title="Student Lable"></label>
-				<separator colSpan="12"/>
+				<separator colSpan="12"/> <!-- keep space according to specify the colspan -->
 				<static>My Static text</static>
 
 				<field name="student" title="Student"  />

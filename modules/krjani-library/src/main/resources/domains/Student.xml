@@ -5,6 +5,11 @@
 
   <module name="library" package="com.axelor.library.db"/>
 
+  <!-- Repository have 3 type 
+  	   Default  with default naming convention repository will be created  
+  	   none  no repository will be created
+  	   abstract we can extend the repository
+  		 -->
   <entity name="Student"> 
   	<string name="name" title="Name" />
     <string name="fname"  title="First-Name"  required="true"  min="2"  namecolumn="true"/>

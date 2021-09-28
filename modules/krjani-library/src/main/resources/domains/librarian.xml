@@ -9,7 +9,7 @@
   		<integer name="statusSelect" selection="library.librarian.status.select" title="Status" />
   		<integer name="priority" />
   		
-  		<decimal name="price" title="$"/>
+  		<decimal name="price" title="Price($)"/>
   		<string name="sname" title="Student:" />
   		<string name="bname" title="Book:" />
   		<string name="description" title="Description" large="true" />

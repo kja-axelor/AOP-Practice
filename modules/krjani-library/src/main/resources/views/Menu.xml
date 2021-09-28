@@ -4,32 +4,50 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
 
+<!-- for ordering menus we can use order attribute 
+	 for giving icon to the menu we use font awesome icon
+	 for giving particular order use order attribute
+	 by default order will be zero, if we specify particular order then it will go according to ascending to descending
+	 tag-count will use for counting record 
+	 tag-style will use for applying style
+	 top will create a top menu in titlebar
+	 tag is used to show a label tag
+	 tag-style will also apply on every tag
+-->
 
-<menuitem title="Library" name="krjani's-library"/>
-<menuitem title="Student"  parent="krjani's-library" action="action.Student.Library" name="Student-Library"/>
-<menuitem title="Books"  parent="krjani's-library" action="action.Books.Library" name="Books-Library"/>
-<menuitem title="Librarian" parent="krjani's-library" action="action.Librarian.Library" name="Librarian-library"/>
+<menuitem title="Library" name="krjani's-library" icon="fa-book" icon-background="orange"
+						  top="true" left="true" mobile="true" tag="___krjani_____" tag-style="warning"/>
+<menuitem title="Books"  parent="krjani's-library" action="action.Books.Library" name="Books-Library" 
+										icon="fa-print" icon-background="red" order="-2" top="true" left="false" tag-count="true" tag-style="important" mobile="true"/>
+<menuitem title="Student"  parent="krjani's-library" action="action.Student.Library" name="Student-Library" 
+										icon="fa-user" icon-background="green" top="true" tag-count="true" tag-style="success"/>
+<menuitem title="Librarian" parent="krjani's-library" action="action.Librarian.Library" name="Librarian-library" 
+										icon="fa-male" icon-background="blue" order="-1" top="true" tag-count="true" tag-style="info" mobile="false"/>
+<menuitem title="Storebook" name="temp-books" parent="krjani's-library" action="action.Books.Library" 
+										icon="fa-print" icon-background="orange" top="true" tag-count="true" tag-style="warning"/>
+ 
 
 
 <action-view name="action.Student.Library" model="com.axelor.library.db.Student" title="Students">
-	<view type="grid" name="student-grid"/>
+	<!-- we can also use views without name (model name we have to give)-->
+	<view type="grid"/>
 	<view type="form" name="student-form"/>
 	<!-- card view -->
 	<view type="cards" name="students-cards"/>
 </action-view>
 
 
-
-<action-view name="action.Books.Library" model="com.axelor.library.db.Books" title="Books">
-	<view type="grid" name="books-grid"/>
+<action-view name="action.Books.Library" model="com.axelor.library.db.Books" title="books">
 	<view type="form" name="books-form"/>
+	<view type="grid" name="books-grid"/>
+	<view-param name="forceTitle" value="true"/>
 </action-view>
 
 
 <action-view name="action.Librarian.Library" title="Librarians" model="com.axelor.library.db.Librarian">
 	<view type="kanban" name="library-kanban"/>
-	<view type="grid" name="library-grid"/>
 	<view type="form" name="library-form"/>
+	<view type="grid" name="library-grid"/>
 </action-view>
 
 </object-views>

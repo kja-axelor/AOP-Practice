@@ -5,10 +5,11 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
   
   <!-- Kan ban view 
-  	like cards field and template is required  in kanban 
+  	like cards, field and template is required  in kanban 
   	first define kanban
   	grid view
   	form view
+  	there have to be a selection field in kanban views
   	limit means upto how many record per column then scroler will add
   -->
   
@@ -28,7 +29,7 @@
   						<h3>{{record.sname}}</h3>
   						<h4>Book:</h4>
   						<h3>{{record.bname}}</h3>
-  						<h4>Price</h4>
+  						<h4>Price($)</h4>
   						<h3>{{record.price}}</h3>
   						<h4>Description:</h4>
   						<span ng-bind-html="description"/>
@@ -58,8 +59,9 @@
   <!-- you can directly add your field name with onNew -->
   <action-record name="action-librarian-kanban-on-new" model="com.axelor.library.db.Librarian">
   		<field name="sname" expr="eval: _value"/>
+  		<!-- _value is a special variable which gives value of particular field -->
   </action-record>
   <action-validate name="action-librarian-validate-kanban-on-move">
-  	<info message="Record moved!!!!!!!!!"/>
+  	<info message="Processing books"/>
   </action-validate>
 </object-views>
