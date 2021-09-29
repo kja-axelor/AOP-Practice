@@ -14,36 +14,76 @@
 	 tag is used to show a label tag
 	 tag-style will also apply on every tag
 -->
+<!-- the order of views 
+	there are defined 3 buttons for switching views
+	but first defined views are display when you click one particular menu
+ -->
 
 <menuitem title="Library" name="krjani's-library" icon="fa-book" icon-background="orange"
 						  top="true" left="true" mobile="true" tag="___krjani_____" tag-style="warning"/>
-<menuitem title="Books"  parent="krjani's-library" action="action.Books.Library" name="Books-Library" 
-										icon="fa-print" icon-background="red" order="-2" top="true" left="false" tag-count="true" tag-style="important" mobile="true"/>
+
+
 <menuitem title="Student"  parent="krjani's-library" action="action.Student.Library" name="Student-Library" 
 										icon="fa-user" icon-background="green" top="true" tag-count="true" tag-style="success"/>
-<menuitem title="Librarian" parent="krjani's-library" action="action.Librarian.Library" name="Librarian-library" 
-										icon="fa-male" icon-background="blue" order="-1" top="true" tag-count="true" tag-style="info" mobile="false"/>
-<menuitem title="Storebook" name="temp-books" parent="krjani's-library" action="action.Books.Library" 
-										icon="fa-print" icon-background="orange" top="true" tag-count="true" tag-style="warning"/>
- 
-
-
-<action-view name="action.Student.Library" model="com.axelor.library.db.Student" title="Students">
+<!-- home=true means that action is getting called as a welcome screen
+	 you have to give that action in user administration action
+ -->
+<action-view name="action.Student.Library" model="com.axelor.library.db.Student" title="Students" home="true">
 	<!-- we can also use views without name (model name we have to give)-->
 	<view type="grid"/>
 	<view type="form" name="student-form"/>
 	<!-- card view -->
 	<view type="cards" name="students-cards"/>
+	<!-- context:::: 
+	context is used for adding extra values to the field and variable
+	from menu to form/grid value are passed
+	domain is used for filtering record(we use JPQL Query in Domain clause)
+	 -->
+	 <!-- <domain>self.roll != null</domain> 
+	 we can also give context to the field 
+	 <domain>self.roll = :name_of_context</domain>
+	 self is for refering particular model
+	
+	 <domain>self.lname = :_test</domain> 
+	 _showRecord is used to display specific record in form view (by given id(which is primary key))
+	  -->
+		<view-param name="show-confirm" value="false"/>
+	<context name="_test" expr="DONE"/>
+	<context name="_showRecord" expr="eval: 1"/>
 </action-view>
 
-
-<action-view name="action.Books.Library" model="com.axelor.library.db.Books" title="books">
-	<view type="form" name="books-form"/>
+ 
+ <!-- view param ::: Additinal parameter that is given to the views 
+ forceEdit :: default edit in form views
+ showArchived :: show the archived values
+ -->
+ 
+<menuitem title="Books"  parent="krjani's-library" action="action.Books.Library" name="Books-Library" 
+										icon="fa-print" icon-background="red" order="2" top="true" left="false" tag-count="true" tag-style="important" mobile="true"/>
+<menuitem title="Storebook" name="temp-books" parent="krjani's-library" action="action.Books.Library" order="3"
+										icon="fa-print" icon-background="orange" top="true" tag-count="true" tag-style="warning"/>
+<action-view name="action.Books.Library" model="com.axelor.library.db.Books" title="Testsssss">
 	<view type="grid" name="books-grid"/>
-	<view-param name="forceTitle" value="true"/>
+	<view type="form" name="books-form"/>
+	<view-param name="forceEdit" value="true"/>
+	<view-param name="showArchived" value="false"/>
+	<view-param name="limit" value="5"/>
+<!-- 	<view-param name="show-toolbar" value="false"/>  need to ask -->
+	
+	<!-- Details view (GRID == GRID + FORM )-->
+	<view-param name="details-view" value="true"/>
+	
+	<!-- search filters :: custom search option 
+		 inside view we declare search filter and from view-param we link it
+	-->
+	<view-param name="search-filters" value="book-search"/>
+	<view-param name="show-confirm" value="true"/>
 </action-view>
 
 
+
+<menuitem title="Librarian" parent="krjani's-library" action="action.Librarian.Library" name="Librarian-library" 
+										icon="fa-male" icon-background="blue" order="-1" top="true" tag-count="true" tag-style="info" mobile="false"/>
 <action-view name="action.Librarian.Library" title="Librarians" model="com.axelor.library.db.Librarian">
 	<view type="kanban" name="library-kanban"/>
 	<view type="form" name="library-form"/>

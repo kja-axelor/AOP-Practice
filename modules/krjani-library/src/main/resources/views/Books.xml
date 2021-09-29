@@ -4,7 +4,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
   
-  <grid name="books-grid" title="Books" 
+  <grid name="books-grid" title="Books Demo" 
     model="com.axelor.library.db.Books" canMove="true"> 
   
   <!--  <grid name="books-grid" title="Books" 
@@ -52,10 +52,10 @@
 				
 <!-- 		*******************		Dummy Field     concept  ***************
 
-type of dummy field is one to many and many to one and boolean also, but we have to give refrence, refrence is required for relational fields  use target attribute
- 				<field name="$isValidated" colSpan="12" type="boolean" readonly="true"/> -->
- 				<field name="$isValidated" colSpan="12" type="one-to-many" target="com.axelor.library.db.Student"/>
- 				
+type of dummy field is one to many and many to one and boolean also, but we have to give refrence, refrence is required for relational fields  use target attribute-->
+ 				<field name="isValidated" colSpan="12" type="boolean" readonly="true"/> 
+ 				<!-- <field name="$isValidated" colSpan="12" type="one-to-many" target="com.axelor.library.db.Student"/>
+ 				 -->
  				
 				<help>This is a place for Student Details</help>
 				<label title="Student Lable"></label>
@@ -81,9 +81,19 @@ type of dummy field is one to many and many to one and boolean also, but we have
   
   
    -->
+   
+   <!-- search filters -->
+   <!-- relational field attribute can be access through dot operator -->
+   <search-filters name="book-search" model="com.axelor.library.db.Books" title="books">
+   		<field name="sequence" hidden="true"/> <!-- for hidding any fields -->
+   		<filter title="apple">
+   			<domain>self.student.fname = 'Payal'</domain>
+   		</filter>
+   </search-filters>
+   <!-- we have to link filter using view param to menu  -->
   
   <action-record name="action-book-validated-btn" model="com.axelor.library.db.Books">
-  	<field name="$isValidated" expr="eval: true"/>
+  	<field name="isValidated" expr="eval: true"/>
   </action-record>
   
   
