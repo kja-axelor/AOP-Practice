@@ -6,7 +6,7 @@
   
   
    <grid name="student-grid" title="Students"
-    model="com.axelor.library.db.Student"> 
+    model="com.axelor.library.db.Student" > 
    
      <field name="fname" title="First-Name"  widget="1000px"/>
      <field name="mname" title="Middle-Name" />
@@ -18,9 +18,10 @@
   
   </grid>
   
-  <form model="com.axelor.library.db.Student" title="Student" name="student-form" onNew="action-new-student-onnew"
-  onLoad="action-load-student,action-Student-attrs" onSave="action-save-student" canAttach="false" width="large"
+  <form model="com.axelor.library.db.Student" title="Student" name="student-form" onNew="action-new-student-onnew,action-student-test"
+  onLoad="action-load-student" onSave="action-save-student" canAttach="true" width="large" 
   >
+
   		<panel-include view="Student-popup-form"/>
   	
 		<panel name="mainPanel" title="MY MAIN PANNEL">
@@ -35,6 +36,7 @@
   		<panel name="innerPanel2" colSpan="4" title="ACADEMIC" hideIf="lname=='Jani'" readonly="false" showFrame="true" attached="true" sidebar="true" stacked="true" collapseIf="true"> 
 				
 			     <field name="roll" title="Roll Number" />
+			     <field name="test" title="Testig" />
 			     <!-- panel related is used for o2m and m2m instead of fields -->
 			     <!--  <field name="book" title="Books"  showTitle="false"/> -->
 			     <!--  <panel-related field="book" title="Books" canNew="true"/> -->
@@ -127,6 +129,13 @@
 	     </template>
 	     
  	</cards>	
+ 	
+ 	<action-record name="action-student-test" model="com.axelor.library.db.Student">
+ 		<field name="test" expr="eval: __this__" />
+ 		<field name="test" expr="eval: test+ __this__"  copy="true"/>
+ 		<!-- copy="true" append the data
+ 		__this__-->
+ 	</action-record>
  
   <action-record name="action-new-student-onnew" model="com.axelor.library.db.Student">
   	<field name="lname" expr="JANI"/>

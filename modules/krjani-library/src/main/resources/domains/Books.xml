@@ -11,6 +11,7 @@
   	
     <string name="name"  title="BookName"   required="true"   min="2" namecolumn="true"/>
     <string name="email" title="Email"  />    
+    <many-to-one name="image" ref="com.axelor.meta.db.MetaFile"></many-to-one>
     <many-to-one name="student" ref="com.axelor.library.db.Student"/>   
     <!-- <many-to-many name="student" ref="com.axelor.library.db.Student"/>   -->
   </entity> 

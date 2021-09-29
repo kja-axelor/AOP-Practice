@@ -37,13 +37,14 @@
     <field name="name" title="BookName :"/>
     <field name="student" title="Student" />
     <field name="sequence"/>
+    <field name="image" />
     <button onClick="clickMe" name="clickbtn" title="Click Me" icon="fa-print" prompt="are you sure ?"/>
     
   </grid>
   
   <!-- readonlyIf="Student" it is used in non relational field -->
   
-  <form model="com.axelor.library.db.Books" title="Books" name="books-form" >
+  <form model="com.axelor.library.db.Books" title="Books" name="books-form" canAttach="true" >
 		<panel-tabs>
 			<panel name="booksDetail" title="Library Store"> 
 					<field name="name" title="BookName :"/>
@@ -69,7 +70,11 @@ type of dummy field is one to many and many to one and boolean also, but we have
 		
 		<panel-tabs>
 			<panel name="buttonPanel" title="ButtonPanel">
-				<button name="validatebtn" title="My Validate Button" onClick="action-book-validate-onclick-btn,action-book-validated-btn" />
+				<button name="validatebtn" title="My Validate Button" onClick="action-book-validate-onclick-btn,action-book-validated-btn" colSpan="4"/>
+			</panel>
+			<panel name="imagePanel" title="Photographs">
+				 <field name="image" />
+				<button name="uploadbtn" title="Upload" onClick="action-photo-upload-onclick-btn" colSpan="4"/>
 			</panel>
 		</panel-tabs>
   </form>
@@ -101,4 +106,8 @@ type of dummy field is one to many and many to one and boolean also, but we have
   	<info message="My Ambitions had clicked me!!!!!!!" if="name == 'My Ambitions'" />
   </action-validate>
   
+  
+  <action-validate name="action-photo-upload-onclick-btn">
+  	<info message="Please upload a photograph" />
+  </action-validate>
 </object-views>
