@@ -19,7 +19,7 @@
   </grid>
   
   <form model="com.axelor.library.db.Student" title="Student" name="student-form" onNew="action-new-student-onnew"
-  onLoad="action-load-student" onSave="action-save-student" canAttach="false" width="large"
+  onLoad="action-load-student,action-Student-attrs" onSave="action-save-student" canAttach="false" width="large"
   >
   		<panel-include view="Student-popup-form"/>
   	
@@ -32,7 +32,7 @@
 			</panel>
 			
 		</panel>
-  		<panel name="innerPanel2" colSpan="4" title="ACADEMIC" hideIf="lname=='Jani'" readonly="false" showFrame="true" attached="true" sidebar="true" stacked="true"  collapseIf="true"> 
+  		<panel name="innerPanel2" colSpan="4" title="ACADEMIC" hideIf="lname=='Jani'" readonly="false" showFrame="true" attached="true" sidebar="true" stacked="true" collapseIf="true"> 
 				
 			     <field name="roll" title="Roll Number" />
 			     <!-- panel related is used for o2m and m2m instead of fields -->
@@ -139,4 +139,17 @@
   <action-record name="action-save-student" model="com.axelor.library.db.Student">
   <field name="lname" expr="DONE" if="lname == 'Hirpara' "/>
   </action-record>
+  
+  <!-- action attrs implementation 
+  	   this action will trigger onload
+  
+   <action-attrs name="action-Student-attrs">
+   		 <attribute name="collapse" for="innerPanel2" expr="eval: true"/> 
+   			 this will keep the pannel collapsed
+   		
+   	 <attribute name="title" for="innerPanel2" expr="eval: 'validated'"/> 
+   			  this will change the title
+   		
+   </action-attrs>
+   -->
 </object-views>
