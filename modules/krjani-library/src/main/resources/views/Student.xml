@@ -12,7 +12,7 @@
      <field name="mname" title="Middle-Name" />
      <field name="lname" title="Sir-Name" />
      <field name="roll" title="Roll Number" />
-     <field name="book" title="Books" />
+     <field name="book" title="Books"/>
      
      
   
@@ -146,8 +146,19 @@
   </action-validate>
   
   <action-record name="action-save-student" model="com.axelor.library.db.Student">
-  <field name="lname" expr="DONE" if="lname == 'Hirpara' "/>
+  <field name="name" expr="action: action-nested-student"  if="lname == 'Hirpara' " />
   </action-record>
+  
+   <action-validate name="action-nested-student">
+  	<info message="You are in danger"/>
+  </action-validate>
+  
+  
+  <action-validate name="action-nested-student">
+  	<info message="You are in danger"/>
+  </action-validate>
+  
+  
   
   <!-- action attrs implementation 
   	   this action will trigger onload

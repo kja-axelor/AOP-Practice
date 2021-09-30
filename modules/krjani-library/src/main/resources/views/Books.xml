@@ -5,7 +5,7 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
   
   <grid name="books-grid" title="Books Demo" 
-    model="com.axelor.library.db.Books" canMove="true"> 
+    model="com.axelor.library.db.Books" canMove="true" editable="false"> 
   
   <!--  <grid name="books-grid" title="Books" 
     model="com.axelor.library.db.Books" canArchive="false" canDelete="false" canEdit="false"  edit-icon="false" canNew="false"  
@@ -35,7 +35,7 @@
         
     <hilite if="BookName = My will" background="danger"/>
     <field name="name" title="BookName :"/>
-    <field name="student" title="Student" />
+    <field name="student" title="Student"/>
     <field name="sequence"/>
     <field name="image" />
     <button onClick="clickMe" name="clickbtn" title="Click Me" icon="fa-print" prompt="are you sure ?"/>
@@ -63,7 +63,7 @@ type of dummy field is one to many and many to one and boolean also, but we have
 				<separator colSpan="12"/> <!-- keep space according to specify the colspan -->
 				<static>My Static text</static>
 
-				<field name="student" title="Student"  />
+				<field name="student" title="Student"/>
 			
 			</panel>
 		</panel-tabs>
@@ -73,7 +73,7 @@ type of dummy field is one to many and many to one and boolean also, but we have
 				<button name="validatebtn" title="My Validate Button" onClick="action-book-validate-onclick-btn,action-book-validated-btn" colSpan="4"/>
 			</panel>
 			<panel name="imagePanel" title="Photographs">
-				 <field name="image" />
+				 <field name="image" widget="image" />
 				<button name="uploadbtn" title="Upload" onClick="action-photo-upload-onclick-btn" colSpan="4"/>
 			</panel>
 		</panel-tabs>
@@ -91,7 +91,7 @@ type of dummy field is one to many and many to one and boolean also, but we have
    <!-- relational field attribute can be access through dot operator -->
    <search-filters name="book-search" model="com.axelor.library.db.Books" title="books">
    		<field name="sequence" hidden="true"/> <!-- for hidding any fields -->
-   		<filter title="apple">
+   		<filter title="apple">	
    			<domain>self.student.fname = 'Payal'</domain>
    		</filter>
    </search-filters>
@@ -108,6 +108,6 @@ type of dummy field is one to many and many to one and boolean also, but we have
   
   
   <action-validate name="action-photo-upload-onclick-btn">
-  	<info message="Please upload a photograph" />
+  	<info message="Please click the save button" />
   </action-validate>
 </object-views>
