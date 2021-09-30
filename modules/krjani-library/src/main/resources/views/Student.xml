@@ -19,7 +19,7 @@
   </grid>
   
   <form model="com.axelor.library.db.Student" title="Student" name="student-form" onNew="action-new-student-onnew,action-student-test"
-  onLoad="action-load-student" onSave="action-save-student" canAttach="true" width="large" 
+  onLoad="action-load-student" onSave="action-save-student,action-student-sirname-check" canAttach="true" width="large" 
   >
 
   		<panel-include view="Student-popup-form"/>
@@ -106,7 +106,7 @@
  	
 	     <field name="fname" title="First-Name"/>
 	     <field name="mname" title="Middle-Name" />
-	     <field name="lname" title="Sir-Name" />
+	     <field name="lname" title="Sir-Name"/>
 	     <field name="roll" title="Roll Number" />
 	     <field name="book" title="Books" />
 	     <template>
@@ -172,4 +172,13 @@
    		
    </action-attrs>
    -->
+   
+   
+   
+   <!-- action condition -->
+   
+   <action-condition name="action-student-sirname-check">
+   <check field="lname" if="lname == 'Hirpara' " error="You are in big trouble Please Update sirname"/>
+   </action-condition>
+   
 </object-views>
