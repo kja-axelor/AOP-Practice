@@ -19,7 +19,7 @@
   </grid>
   
   <form model="com.axelor.library.db.Student" title="Student" name="student-form" onNew="action-new-student-onnew,action-student-test"
-  onLoad="action-load-student" onSave="action-save-student,action-student-sirname-check" canAttach="true" width="large" 
+  onLoad="action-load-student" onSave="action-save-student,action-student-sirname-check" canAttach="true" width="large"
   >
 
   		<panel-include view="Student-popup-form"/>
@@ -168,7 +168,7 @@
    			 this will keep the pannel collapsed
    		
    	 <attribute name="title" for="innerPanel2" expr="eval: 'validated'"/> 
-   			  this will change the title
+   			  this will change the title	
    		
    </action-attrs>
    -->

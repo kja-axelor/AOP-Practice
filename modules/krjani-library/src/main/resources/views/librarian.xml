@@ -72,7 +72,7 @@
   -->
   
   <action-attrs name="action-Librarian-attrs">
-  	<attribute name="readonly" for="bname" expr="eval: statusSelect == 1"/>
+  	<attribute name="" for="bname" expr="hELLO" if="statusSelect == '1' "/>
   </action-attrs>
   
   <!-- action-group 

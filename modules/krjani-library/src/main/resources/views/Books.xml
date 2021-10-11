@@ -62,6 +62,9 @@ type of dummy field is one to many and many to one and boolean also, but we have
 				<label title="Student Lable"></label>
 				<separator colSpan="12"/> <!-- keep space according to specify the colspan -->
 				<static>My Static text</static>
+				
+				<!-- avoid using save i.e saving of record on onchange.. -->
+				<field name="transient" title="Transient" onChange="action-method-for-student"/>
 
 				<field name="student" title="Student"/>
 			
@@ -110,4 +113,13 @@ type of dummy field is one to many and many to one and boolean also, but we have
   <action-validate name="action-photo-upload-onclick-btn">
   	<info message="Please click the save button" />
   </action-validate>
+  
+  
+   
+   <!-- Action Method  -->
+   <action-method name="action-method-for-student">
+   	<call class="com.axelor.library.web.BooksController" method="checker"/>
+   </action-method>
+   
+   
 </object-views>
