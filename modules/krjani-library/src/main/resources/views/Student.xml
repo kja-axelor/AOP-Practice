@@ -181,4 +181,5 @@
    <check field="lname" if="lname == 'Hirpara' " error="You are in big trouble Please Update sirname"/>
    </action-condition>
    
+   
 </object-views>

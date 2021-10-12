@@ -46,10 +46,10 @@
   	<field name="description"/>
   </grid>
   
-  <form model="com.axelor.library.db.Librarian" title="Librarian" name="library-form" onLoad="action-Librarian-attrs">
+  <form model="com.axelor.library.db.Librarian" title="Librarian" name="library-form" onLoad="action-Librarian-attrs,action-Librarian-group-statusSelect-onchange">
   	<panel name="mainPanel" title="Librarian">
   		<!-- onchange means whenever field value will change it will trigger -->
-  		<field name="statusSelect" showTitle="false" widget="NavSelect" colSpan="12" onChange="action-Librarian-group-statusSelect-onchange" />
+  		<field name="statusSelect" showTitle="false" widget="NavSelect" colSpan="12" onChange="action-method-for-librarian"/>
 	  	<field name="sname"/>
 	  	<field name="bname"/>
 	 	<field name="price"/>
@@ -72,7 +72,7 @@
   -->
   
   <action-attrs name="action-Librarian-attrs">
-  	<attribute name="" for="bname" expr="hELLO" if="statusSelect == '1' "/>
+  	<attribute name="readonly" for="bname" expr= "statusSelect == '1' "/>
   </action-attrs>
   
   <!-- action-group 
@@ -84,5 +84,9 @@
    	<action name="action-Librarian-attrs"/>
    	<action name="save"/>
    </action-group>
+   
+   <action-method name="action-method-for-librarian">
+   <call class="com.axelor.library.web.LibrarianController" method="tester"/>
+   </action-method>
   
 </object-views>

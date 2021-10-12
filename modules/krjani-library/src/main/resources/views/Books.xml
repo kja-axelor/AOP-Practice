@@ -77,7 +77,7 @@ type of dummy field is one to many and many to one and boolean also, but we have
 			</panel>
 			<panel name="imagePanel" title="Photographs">
 				 <field name="image" widget="image" />
-				<button name="uploadbtn" title="Upload" onClick="action-photo-upload-onclick-btn" colSpan="4"/>
+				<button name="uploadbtn" title="Upload" onClick="action-photo-upload-onclick-btn,calling-test" colSpan="4"/>
 			</panel>
 		</panel-tabs>
   </form>
@@ -121,5 +121,9 @@ type of dummy field is one to many and many to one and boolean also, but we have
    	<call class="com.axelor.library.web.BooksController" method="checker"/>
    </action-method>
    
+   <!-- calling service method without action method -->
+   <action-record name="calling-test" model="com.axelor.library.db.Books">
+   <field name="uploadbtn" expr="call: com.axelor.library.web.LibrarianController:callee('Kishan R Jani')"/>
+   </action-record>
    
 </object-views>

@@ -2,7 +2,9 @@ package com.axelor.library.web;
 
 import com.axelor.inject.Beans;
 import com.axelor.library.db.Books;
+import com.axelor.library.db.Librarian;
 import com.axelor.library.db.repo.BooksRepository;
+import com.axelor.library.db.repo.LibrarianRepository;
 import com.axelor.library.service.BooksService;
 import com.axelor.meta.schema.actions.ActionView;
 import com.axelor.meta.schema.actions.ActionView.ActionViewBuilder;
@@ -11,6 +13,7 @@ import com.axelor.rpc.ActionResponse;
 import com.axelor.rpc.Context;
 
 public class BooksController {
+	
 	public void checker(ActionRequest request, ActionResponse response) {
 //		For getting context value
 		Context contect = request.getContext();
@@ -60,4 +63,5 @@ public class BooksController {
 		
 		
 	}
+	
 }
