@@ -16,6 +16,8 @@ public class LibrarianController {
 		
 		Librarian librarian = contect.asType(Librarian.class);
 		
+		if(librarian.getStatusSelect()==1) {
+		
 		if (librarian.getId() != null) {
 			librarian = Beans.get(LibrarianRepository.class).find(librarian.getId());
 		}
@@ -24,6 +26,7 @@ public class LibrarianController {
 		response.setView("ADMIN","com.axelor.library.db.Books","grid","self.name = 'ABCD' ");
 		
 		response.setView("ADMIN", "com.axelor.library.db.Books","grid", "self.student.fname = 'Hardip' ");
+		}
 	}
 	
 	@CallMethod
@@ -33,6 +36,5 @@ public class LibrarianController {
 	@CallMethod
 	public void callee(String name) {
 		System.err.println("Hello request for calling from "+name);
-	}
-
+	}	
 }

@@ -2,10 +2,9 @@ package com.axelor.library.web;
 
 import com.axelor.inject.Beans;
 import com.axelor.library.db.Books;
-import com.axelor.library.db.Librarian;
 import com.axelor.library.db.repo.BooksRepository;
-import com.axelor.library.db.repo.LibrarianRepository;
 import com.axelor.library.service.BooksService;
+import com.axelor.meta.CallMethod;
 import com.axelor.meta.schema.actions.ActionView;
 import com.axelor.meta.schema.actions.ActionView.ActionViewBuilder;
 import com.axelor.rpc.ActionRequest;
@@ -13,7 +12,7 @@ import com.axelor.rpc.ActionResponse;
 import com.axelor.rpc.Context;
 
 public class BooksController {
-	
+
 	public void checker(ActionRequest request, ActionResponse response) {
 //		For getting context value
 		Context contect = request.getContext();
@@ -42,26 +41,32 @@ public class BooksController {
 //		response.setAlert("hello from alert");
 //		response.setError("My error");
 		response.setFlash("My Information");
-		
-		
+
 //		used to update attributes (response.setAttr)
 //		response.setAttr('fieldname', 'attribute', 'value');
 		response.setAttr("name", "readonly", books);
-		
-		
 
 //		Action view Builder
 //		define --title model -- modelName add -- grid/form & name
-		ActionViewBuilder actionviewbuilder = ActionView.define("LibraryWALA").model("com.axelor.library.db.Librarian").add("grid","library-grid");
+		ActionViewBuilder actionviewbuilder = ActionView.define("LibraryWALA").model("com.axelor.library.db.Librarian")
+				.add("grid", "library-grid");
 		response.setView(actionviewbuilder.map());
-		
-		
+
 //		action view 
 //		It will create view 
 //		title,model,grid/form,filter
-		response.setView("LibraryWALA","com.axelor.library.db.Librarian","grid","bname = 'My name is King' ");
-		
-		
+		response.setView("LibraryWALA", "com.axelor.library.db.Librarian", "grid", "bname = 'My name is King' ");
+
 	}
-	
+
+	@CallMethod
+	public Books getObject(ActionRequest request, ActionResponse response) {
+//		Context context = request.getContext();
+//		Student student = context.asType(Student.class);
+		Books books = Beans.get(BooksRepository.class).all().fetchOne();
+		System.err.println(books);
+		response.setValue("$book1", books);
+		return books;
+	}
+
 }

@@ -19,62 +19,65 @@
   </grid>
   
   <form model="com.axelor.library.db.Student" title="Student" name="student-form" onNew="action-new-student-onnew,action-student-test"
-  onLoad="action-load-student" onSave="action-save-student,action-student-sirname-check" canAttach="true" width="large"
-  >
+	onSave="action-save-student,action-student-sirname-check" canAttach="true" width="large"
+	onLoad="action-load-student,action-student-attrs,action-student-record">
 
-  		<panel-include view="Student-popup-form"/>
+  			<panel-include view="Student-popup-form"/>
   	
-		<panel name="mainPanel" title="MY MAIN PANNEL">
-		
-			<panel name="innerPanel1" colSpan="8" title="PERSONAL" collapseIf="true"> 	
-			 	<!-- <field name="fname" title="First-Name" colSpan="4" /> -->
-		     	<field name="mname" title="Middle-Name" />
-		    	<!-- 	<field name="lname" title="Sir-Name"  />  -->
+			<panel name="mainPanel" title="MY MAIN PANNEL">
+			
+				<field name="$book1" title="Default book" type="many-to-one" target="com.axelor.library.db.Books"/>
+				<panel name="innerPanel1" colSpan="8" title="PERSONAL"> 	
+				 	<!-- <field name="fname" title="First-Name" colSpan="4" /> -->
+			     	<field name="mname" title="Middle-Name" />
+			    	<!-- 	<field name="lname" title="Sir-Name"  />  -->
+			    	<!-- dummy -->
+				</panel>
+			
 			</panel>
 			
-		</panel>
-  		<panel name="innerPanel2" colSpan="4" title="ACADEMIC" hideIf="lname=='Jani'" readonly="false" showFrame="true" attached="true" sidebar="true" stacked="true" collapseIf="true"> 
+  			<panel name="innerPanel2" colSpan="4" title="ACADEMIC" hideIf="lname=='Jani'" readonly="false" showFrame="true" attached="true" sidebar="true" stacked="true"> 
 				
 			     <field name="roll" title="Roll Number" />
-			     <field name="test" title="Testig" />
+			     <field name="test" title="Testing" />
 			     <!-- panel related is used for o2m and m2m instead of fields -->
 			     <!--  <field name="book" title="Books"  showTitle="false"/> -->
 			     <!--  <panel-related field="book" title="Books" canNew="true"/> -->
-		</panel> 
-		<panel-tabs>
-			<panel title="BookStore">
-				 <!-- panel related is used for o2m and m2m instead of fields -->
-			     <!--  <field name="book" title="Books"  showTitle="false"/> -->
-			     <!-- x-selector checkbox means , to select all row , there are checkbox in first column to select on -->
-			     <panel-related field="book" title="Books" canNew="true" colSpan="12" canMove="true" orderBy="name" x-selector="checkbox"/>
-			</panel>
+			</panel> 
+			
+			<panel-tabs>
+				<panel title="BookStore">
+					 <!-- panel related is used for o2m and m2m instead of fields -->
+				     <!--  <field name="book" title="Books"  showTitle="false"/> -->
+				     <!-- x-selector checkbox means , to select all row , there are checkbox in first column to select on -->
+				     <panel-related field="book" title="Books" canNew="true" colSpan="12" canMove="true" orderBy="name" x-selector="checkbox" canSelect="true"/>
+				</panel>
 			
 			<!-- 			Editor Text              
 			editor viewer will give an impact that relation model field in the same form not in another form (pop up form) but the view will be differnet
 			in the text mode
 			   -->
-			<panel title="books editor">
-				<field name="book" >
-					<editor x-viewer="true">
-						<field name="name"></field>
-					</editor>
-				</field>
-			</panel>
+				<panel title="books editor">
+					<field name="book" >
+						<editor x-viewer="true">
+							<field name="name"></field>
+						</editor>
+					</field>
+				</panel>
 			
-			<panel title="books viewer">
-				<field name="book" >
-					<viewer>
-						<![CDATA[
-								<strong>Bookname</strong>
-								<h1>{{record.name}}</h1>
-						]]>		
-					</viewer>
-					<editor x-viewer="false">
-						<field name="name" />
-					</editor>
-				</field>
-			</panel>
-
+				<panel title="books viewer">
+					<field name="book" >
+						<viewer>
+							<![CDATA[
+									<strong>Bookname</strong>
+									<h1>{{record.name}}</h1>
+							]]>		
+						</viewer>
+						<editor x-viewer="false">
+							<field name="name" />
+						</editor>
+					</field>
+				</panel>
 		</panel-tabs>
   </form>
   
@@ -85,7 +88,7 @@
   -->
   <!--   form2 -->
   <form model="com.axelor.library.db.Student" title="Student" name="Student-popup-form">
-	  	<panel name="mainPanel" colSpan="8" title="PERSONAL" collapseIf="true"> 	
+	  	<panel name="mainPanel" colSpan="8" title="PERSONAL"> 	
 					<field name="fname" title="First-Name" colSpan="4" />
 			     	<!-- <field name="mname" title="Middle-Name" /> -->
 			     	 <field name="lname" title="Sir-Name"  />
@@ -130,34 +133,34 @@
 	     
  	</cards>	
  	
- 	<action-record name="action-student-test" model="com.axelor.library.db.Student">
+ <action-record name="action-student-test" model="com.axelor.library.db.Student">
  		<field name="test" expr="eval: __this__" />
  		<field name="test" expr="eval: test+ __this__"  copy="true"/>
  		<!-- copy="true" append the data
  		__this__-->
- 	</action-record>
+ </action-record>
  
-  <action-record name="action-new-student-onnew" model="com.axelor.library.db.Student">
-  	<field name="lname" expr="JANI"/>
-  </action-record>
-  
-  <action-validate name="action-load-student" model="com.axelor.library.db.Student">
-  	<notify message="This Student dont have rollnumber" if="roll == 0"/>
-  </action-validate>
-  
-  <action-record name="action-save-student" model="com.axelor.library.db.Student">
-  <field name="name" expr="action: action-nested-student"  if="lname == 'Hirpara' " />
-  </action-record>
-  
-   <action-validate name="action-nested-student">
-  	<info message="You are in danger"/>
-  </action-validate>
-  
-  
+ <action-record name="action-new-student-onnew" model="com.axelor.library.db.Student">
+ 	<field name="lname" expr="JANI"/>
+ </action-record>
+ 
+ <action-validate name="action-load-student" model="com.axelor.library.db.Student">
+ 	<notify message="This Student dont have rollnumber" if="roll == 0"/>
+ </action-validate>
+ 
+ <action-record name="action-save-student" model="com.axelor.library.db.Student">
+ <field name="name" expr="action: action-nested-student"  if="lname == 'Hirpara' " />
+ </action-record>
+ 
   <action-validate name="action-nested-student">
-  	<info message="You are in danger"/>
-  </action-validate>
-  
+ 	<info message="You are in danger"/>
+ </action-validate>
+ 
+ 
+ <action-validate name="action-nested-student">
+ 	<info message="You are in danger"/>
+ </action-validate>
+ 
   
   
   <!-- action attrs implementation 
@@ -173,13 +176,22 @@
    </action-attrs>
    -->
    
-   
-   
-   <!-- action condition -->
-   
-   <action-condition name="action-student-sirname-check">
-   <check field="lname" if="lname == 'Hirpara' " error="You are in big trouble Please Update sirname"/>
-   </action-condition>
-   
+<action-attrs name="action-student-attrs" >
+	 <attribute name="value:add" for="book" expr="eval: 'the king kr is back' " if="fname == 'Kishan' " /> 
+	<!-- <attribute name="value:del" for="book" expr="eval: 'the king kr is back' " /> -->
+	 <attribute name="domain" for="book" expr="self.name = 'Scam 1992' "/> 
+		</action-attrs>   
+
+<action-record name="action-student-record" model="com.axelor.library.db.Student">
+	<field name="$book2" expr="call:com.axelor.library.web.BooksController:getObject"/>
+</action-record>
+  
+ 
+  <!-- action condition -->
+  
+<action-condition name="action-student-sirname-check">
+<check field="lname" if="lname == 'Hirpara' " error="You are in big trouble Please Update sirname"/>
+</action-condition>
+  
    
 </object-views>

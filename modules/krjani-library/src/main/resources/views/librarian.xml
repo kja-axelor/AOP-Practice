@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
-  
-  <!-- Kan ban view 
-  	like cards, field and template is required  in kanban 
-  	first define kanban
-  	grid view
-  	form view
-  	there have to be a selection field in kanban views
-  	limit means upto how many record per column then scroler will add
-  -->
-  
-  <kanban name="library-kanban" sequenceBy="priority" model="com.axelor.library.db.Librarian" 
-  columnBy="statusSelect" title="Librarians" draggable="true"
-   onMove="action-librarian-validate-kanban-on-move" onNew="action-librarian-kanban-on-new"
-   limit="2"
-   >
-  	<field name="sname"/>
-  	<field name="bname"/>
- 	<field name="price"/>
-  	<field name="description"/>
-  	<template>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+	<!-- Kan ban view like cards, field and template is required in kanban first 
+		define kanban grid view form view there have to be a selection field in kanban 
+		views limit means upto how many record per column then scroler will add -->
+
+	<kanban name="library-kanban" sequenceBy="priority"
+		model="com.axelor.library.db.Librarian" columnBy="statusSelect"
+		title="Librarians" draggable="true"
+		onMove="action-librarian-validate-kanban-on-move"
+		onNew="action-librarian-kanban-on-new" limit="2">
+		<field name="sname" />
+		<field name="bname" />
+		<field name="price" />
+		<field name="description" />
+		<template>
   		<![CDATA[
   					<div>
   						<h4>Student:</h4>
@@ -36,57 +31,71 @@
   					</div>
   		]]>
   	</template>
-  </kanban>
-  
-  <grid model="com.axelor.library.db.Librarian" title="Librarian" name="library-grid">
- 	<field name="statusSelect" showTitle="false" widget="NavSelect" />
- 	<field name="sname"/>
-  	<field name="bname"/>
- 	<field name="price"/>
-  	<field name="description"/>
-  </grid>
-  
-  <form model="com.axelor.library.db.Librarian" title="Librarian" name="library-form" onLoad="action-Librarian-attrs,action-Librarian-group-statusSelect-onchange">
-  	<panel name="mainPanel" title="Librarian">
-  		<!-- onchange means whenever field value will change it will trigger -->
-  		<field name="statusSelect" showTitle="false" widget="NavSelect" colSpan="12" onChange="action-method-for-librarian"/>
-	  	<field name="sname"/>
-	  	<field name="bname"/>
-	 	<field name="price"/>
-	  	<field name="description" widget="html" colSpan="12"/>
-  	</panel>
-  </form>
-  
-  <!-- you can directly add your field name with onNew -->
-  <action-record name="action-librarian-kanban-on-new" model="com.axelor.library.db.Librarian">
-  		<field name="sname" expr="eval: _value"/>
-  		<!-- _value is a special variable which gives value of particular field -->
-  </action-record>
-  <action-validate name="action-librarian-validate-kanban-on-move">
-  	<info message="Processing books"/>
-  </action-validate>
-  
-  <!-- action attrs 
-  	   naming convention action-entity-attrs
-  	   expr: eval: condition, condition is true then it will simplyfy as true else it will do false
-  -->
-  
-  <action-attrs name="action-Librarian-attrs">
-  	<attribute name="readonly" for="bname" expr= "statusSelect == '1' "/>
-  </action-attrs>
-  
-  <!-- action-group 
-  	   this will group more than one action into single action
-  	   action-save :: save the record
-   -->
-   <action-group name="action-Librarian-group-statusSelect-onchange">
-   	<action name="save"/>
-   	<action name="action-Librarian-attrs"/>
-   	<action name="save"/>
-   </action-group>
-   
-   <action-method name="action-method-for-librarian">
-   <call class="com.axelor.library.web.LibrarianController" method="tester"/>
-   </action-method>
-  
+	</kanban>
+
+	<grid model="com.axelor.library.db.Librarian" title="Librarian"
+		name="library-grid">
+		<field name="statusSelect" showTitle="false" widget="NavSelect"
+			onChange="action-Librarian-group-statusSelect-onchange" />
+		<field name="sname" />
+		<field name="bname" />
+		<field name="price" />
+		<field name="description" />
+	</grid>
+
+	<form model="com.axelor.library.db.Librarian" title="Librarian"
+		name="library-form" onLoad="action-Librarian-attrs">
+		<panel name="mainPanel" title="Librarian">
+			<!-- onchange means whenever field value will change it will trigger -->
+			<field name="statusSelect" showTitle="false" widget="NavSelect"
+				colSpan="12"
+				onChange="action-method-for-librarian,action-Librarian-group-statusSelect-onchange" />
+			<field name="sname" />
+			<field name="bname" />
+			<field name="price" />
+			<field name="description" widget="html" colSpan="12" />
+		</panel>
+	</form>
+
+	<!-- you can directly add your field name with onNew -->
+	<action-record name="action-librarian-kanban-on-new"
+		model="com.axelor.library.db.Librarian">
+		<field name="sname" expr="eval: _value" />
+		<!-- _value is a special variable which gives value of particular field -->
+	</action-record>
+	<action-validate
+		name="action-librarian-validate-kanban-on-move">
+		<info message="Processing books" />
+	</action-validate>
+
+	<!-- action attrs naming convention action-entity-attrs expr: eval: condition, 
+		condition is true then it will simplyfy as true else it will do false -->
+
+	<action-attrs name="action-Librarian-attrs">
+		<attribute name="readonly" for="bname"
+			expr="eval: statusSelect &gt; 3" />
+		<attribute name="hidden" for="price"
+			expr="eval: statusSelect == 3" />
+		<attribute name="value" for="bname" expr="krjani"
+			if="statusSelect == 3 " />
+		<attribute name="value:set" for="bname" expr="krjani"
+			if="statusSelect == 3 " />
+		<attribute name="required" for="bname"
+			expr="eval: statusSelect == 2" />
+	</action-attrs>
+
+	<!-- action-group this will group more than one action into single action 
+		action-save :: save the record -->
+	<action-group
+		name="action-Librarian-group-statusSelect-onchange">
+		<action name="save" />
+		<action name="action-Librarian-attrs" />
+		<action name="save" />
+	</action-group>
+
+	<action-method name="action-method-for-librarian">
+		<call class="com.axelor.library.web.LibrarianController"
+			method="tester" />
+	</action-method>
+
 </object-views>
