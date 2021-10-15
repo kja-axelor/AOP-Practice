@@ -13,8 +13,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
 
-
-@Path("/app")
+@Path("/student")
 public class StudentService {
 
 	@Inject
@@ -22,7 +21,7 @@ public class StudentService {
 
 	JsonNodeFactory jsonFactory = JsonNodeFactory.instance;
 
-	@Path("/student")
+	@Path("/all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public JsonNode hello() {
@@ -39,7 +38,7 @@ public class StudentService {
 			studentNode.put("middleName", s.getMname());
 			studentNode.put("lastName", s.getLname());
 			studentNode.put("RollNumber", s.getRoll());
-			studentNode.putPOJO("Hello", s);
+			studentNode.putPOJO("0", s);
 			arrayNode.add(studentNode); 	
 		}
 		mainNode.put("status", 0);
